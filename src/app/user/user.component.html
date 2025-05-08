@@ -1,6 +1,15 @@
-<div>
-  <button>
-    <img src="" alt="">
-    <span>NAME</span>
+<!--<div>
+  <button (click)="onSelectUser()">
+    <!--<img [src]= "'assets/images/' + selectedUser.avatar" [alt]="selectedUser.name">  <!--Property binding (recommended); works similarly to interpolation but is safer and more powerful-->
+    <!--<img [src]="imagePath" [alt]="selectedUser.name">   <!--imagePath(no '()') is the get funct  //SIGNALS imagePath() selectedUser() selectedUser()-->
+    <!--<span>{{selectedUser.name}}</span>  <!--string interpolation-->
+  <!--</button>
+<!--</div>
+-->
+
+<div>  <!--here use values ok from user.component.ts-->
+  <button (click)="onSelectUser()">
+    <img [src]="imagePath" [alt]="name">   <!--imagePath(no '()') is the get funct  //SIGNALS imagePath() selectedUser() selectedUser()-->
+    <span>{{name}}</span>  <!--string interpolation-->
   </button>
 </div>
