@@ -9,7 +9,7 @@
 
 <div>  <!--here use values ok from user.component.ts-->
   <button (click)="onSelectUser()">
-    <img [src]="imagePath" [alt]="name">   <!--imagePath(no '()') is the get funct  //SIGNALS imagePath() selectedUser() selectedUser()-->
-    <span>{{name}}</span>  <!--string interpolation-->
+    <img [src]="imagePath" [alt]="user.name">   <!--imagePath(no '()'!!) x get funct  //SIGNALS imagePath() selectedUser() selectedUser()-->
+    <span>{{user.name}}</span>  <!--string interpolation-->
   </button>
 </div>

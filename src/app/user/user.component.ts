@@ -3,6 +3,18 @@ import { DUMMY_USERS } from '../dummy-users';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
+
+// type User {
+//     id: string;
+//     name: string;
+//     avatar: string;
+// }
+interface User {
+    id: string;
+    name: string;
+    avatar: string;
+}
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -33,11 +45,14 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 //   }
 // }
 
-//see all persons
+
 export class UserComponent {
-  @Input ({required: true}) id!: string;
-  @Input({required: true}) avatar!: string;  //@Input receives value from the father(here receives from app.component.html), !(means trust required) type string
-  @Input({required: true}) name!: string;  //better add always 'required:true' so if value missing in the html it will throw an error
+  //@Input ({required: true}) id!: string;  //se fosse stato '?' significa usa string is 'id' exist, otherwise set type undefined
+  //@Input({required: true}) avatar!: string;  //@Input receives value from the father(here receives from app.component.html), !(means trust required) type string
+  //@Input({required: true}) name!: string;  //better add always 'required:true' so if value missing in the html it will throw an error
+
+  @Input({required: true}) user!: User;
+
   //@Output() select = new EventEmitter<string>(); //evento personalizzato che il componente può "sparare" verso l’esterno al father
   select = output<string>(); // better and new than the row upper, use 'output function'(instead of 'output decoration')
 
@@ -48,10 +63,10 @@ export class UserComponent {
 
 
   get imagePath(){
-    return 'assets/images/users/' + this.avatar;
+    return 'assets/images/users/' + this.user.avatar;
   }
   onSelectUser(){  //in html user.component.html, when user clicks on the button, the event is emitted (shot to the father)
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);  //'select' viene quindi catturato in row '(select) = "onSelectUser($event)"' in app.component.html
   }
 
 }
