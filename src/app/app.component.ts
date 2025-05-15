@@ -12,5 +12,9 @@ import { DUMMY_USERS } from './dummy-users';
 })
 export class AppComponent {
   title = 'angular_start';
-  users = DUMMY_USERS;
+  users = DUMMY_USERS;  //set all the users, now available on app.component.html
+
+  onSelectUser(id:string){
+    console.log("Selected user with id "+id);
+  }
 }

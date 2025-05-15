@@ -1,4 +1,4 @@
-import { Component, computed, Input, signal } from '@angular/core';
+import { Component, computed, EventEmitter, input, Input, output, Output, signal } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
@@ -35,10 +35,23 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 //see all persons
 export class UserComponent {
-  @Input() avatar!: string;  //@Input receives value from the father(here receives from app.component.html), !(means trust required) type string
-  @Input() name!: string;
+  @Input ({required: true}) id!: string;
+  @Input({required: true}) avatar!: string;  //@Input receives value from the father(here receives from app.component.html), !(means trust required) type string
+  @Input({required: true}) name!: string;  //better add always 'required:true' so if value missing in the html it will throw an error
+  //@Output() select = new EventEmitter<string>(); //evento personalizzato che il componente può "sparare" verso l’esterno al father
+  select = output<string>(); // better and new than the row upper, use 'output function'(instead of 'output decoration')
+
+  //SIGNALS
+  // avatar = input.required<string>();  //uso di 'input function' (Input is instead 'input decoration'!)
+  // name = input.required<string>();
+  // imagePath = computed(() => 'assets/images/users/' + this.avatar());
+
+
   get imagePath(){
     return 'assets/images/users/' + this.avatar;
   }
-  onSelectUser(){}
+  onSelectUser(){  //in html user.component.html, when user clicks on the button, the event is emitted (shot to the father)
+    this.select.emit(this.id);
+  }
+
 }
