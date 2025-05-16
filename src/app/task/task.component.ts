@@ -1,6 +1,8 @@
 import { Component, input , signal } from '@angular/core';
 import { SingleTaskComponent } from "./single-task/single-task.component";
 import { NewTaskComponent } from "./new-task/new-task.component";  //present 'signal' !
+import { NewTaskData } from './single-task/single-task.model';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-task',
@@ -10,48 +12,30 @@ import { NewTaskComponent } from "./new-task/new-task.component";  //present 'si
 })
 
 export class TaskComponent {
-  userName = input<string>();
-  userId = input<string>();  //id for display ONLY the task of the selected user!
 
+  userName = input.required<string>();
+  userId = input.required<string>();  //id for display ONLY the task of the selected user!
   isAddingTask = false;
+  //private taskService = new TaskService();
 
-  tasks = [{
-    id: 't1',
-    userId: 'u1',
-    title: 'Master Angular',
-    summary:
-      'Learn all the basic and advanced features of Angular & how to apply them.',
-    dueDate: '2025-12-31',
-  },
-  {
-    id: 't2',
-    userId: 'u3',
-    title: 'Build first prototype',
-    summary: 'Build a first prototype of the online shop website',
-    dueDate: '2024-05-31',
-  },
-  {
-    id: 't3',
-    userId: 'u3',
-    title: 'Prepare issue template',
-    summary:
-      'Prepare and describe an issue template which will help with project management',
-    dueDate: '2024-06-15',
-  }];
+  constructor(private taskService : TaskService ){}  //DEPENDECY INJECTION!!!
 
   get selectedUserTasks(){
-    return this.tasks.filter(task => task.userId === this.userId());  //always use '()' x signals
+    //return this.tasks.filter(task => task.userId === this.userId());  //always use '()' x signals
+    return this.taskService.getUserTasks(this.userId());
   }
 
-  onCompleteTask(id: string){
-    this.tasks = this.tasks.filter(task => task.id !== id);
-  }
+  onCompleteTask(id: string){}
 
   onStartAddTask(){
     this.isAddingTask = true;
   }
 
   onCancelAddTask(){
+    this.isAddingTask = false;
+  }
+
+  onAddTask(taskData: NewTaskData){
     this.isAddingTask = false;
   }
 

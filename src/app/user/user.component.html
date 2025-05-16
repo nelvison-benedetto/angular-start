@@ -7,9 +7,9 @@
 <!--</div>
 -->
 
-<div>  <!--here use values ok from user.component.ts-->
+<app-card>  <!--here use values ok from user.component.ts-->
   <button [class.active]="isSelected()" (click)="onSelectUser()">  <!--ADD class class.active ONLY IF value boolean of isSelected is true-->
     <img [src]="imagePath" [alt]="user.name">   <!--imagePath(no '()'!!) x get funct  //SIGNALS imagePath() selectedUser() selectedUser()-->
     <span>{{user.name}}</span>  <!--string interpolation-->
   </button>
-</div>
+</app-card>

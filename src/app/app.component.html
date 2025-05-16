@@ -1,22 +1,22 @@
 <app-header></app-header>
 
 <main>
-  <ul id="users">  <!--track is used by angular as unique indetication criteria-->
-    @for(user of users; track user.id){
-      <li>
-        <app-user
-          [user] = "user"
-          [isSelected]="user.id === selectedUserId"
-          (select) = "onSelectUser($event)"
-        ></app-user>  <!--'users' came from app.component.ts export, and pass value to UserComponent used in @Input,-->
-      </li>           <!--when component emits event called 'select',  run function 'ONSelectUser' of app.component.ts !, $event contains the value that the component emitted!!-->
+    <ul id="users">  <!--track is used by angular as unique indetication criteria-->
+      @for(user of users; track user.id){
+        <li>
+          <app-user
+            [user] = "user"
+            [isSelected]="user.id === selectedUserId"
+            (select) = "onSelectUser($event)"
+          ></app-user>  <!--'users' came from app.component.ts export, and pass value to UserComponent used in @Input,-->
+        </li>           <!--when component emits event called 'select',  run function 'ONSelectUser' of app.component.ts !, $event contains the value that the component emitted!!-->
+      }
+    </ul>
+    @if(selectedUser){
+      <app-task [userId]="selectedUser.id" [userName]="selectedUser.name"></app-task>
+    }@else{
+      <p id="fallback">Select a user to see their tasks.</p>
     }
-  </ul>
-  @if(selectedUser){
-    <app-task [userId]="selectedUser.id" [userName]="selectedUser.name"></app-task>
-  }@else{
-    <p id="fallback">Select a user to see their tasks.</p>
-  }
 
     <!-- <li>
       <app-user
