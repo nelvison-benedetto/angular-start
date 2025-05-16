@@ -1,3 +1,18 @@
-<div>
-  <p>{{userName()}}</p>  <!--use '()' x signal !!-->
-</div>
+
+<section id="tasks">
+  <header>
+    <h2>{{userName()}}'s Tasks</h2>  <!--use '()' x signal !!-->
+    <menu>
+      <button>Add a Task</button>
+    </menu>
+  </header>
+
+  <ul>
+    @for(task of selectedUserTasks; track task.id){
+      <li>
+        <app-single-task [task] = "task"></app-single-task>
+      </li>
+    }
+  </ul>
+
+</section>

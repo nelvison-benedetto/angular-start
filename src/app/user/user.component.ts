@@ -1,5 +1,6 @@
 import { Component, computed, EventEmitter, input, Input, output, Output, signal } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
+import { User } from './user.model';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
@@ -9,11 +10,7 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 //     name: string;
 //     avatar: string;
 // }
-interface User {
-    id: string;
-    name: string;
-    avatar: string;
-}
+
 
 @Component({
   selector: 'app-user',
@@ -52,7 +49,7 @@ export class UserComponent {
   //@Input({required: true}) name!: string;  //better add always 'required:true' so if value missing in the html it will throw an error
 
   @Input({required: true}) user!: User;
-
+  isSelected = input.required<boolean>();
   //@Output() select = new EventEmitter<string>(); //evento personalizzato che il componente può "sparare" verso l’esterno al father
   select = output<string>(); // better and new than the row upper, use 'output function'(instead of 'output decoration')
 

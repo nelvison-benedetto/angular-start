@@ -15,7 +15,7 @@ export class AppComponent {
   title = 'angular_start';
   users = DUMMY_USERS;  //set all the users, now available on app.component.html
 
-  selectedUserId = 'u1';  //!!!set selected user it will be used in the task
+  selectedUserId?: string;  //!!!set selected user it will be used in the task
 
   onSelectUser(id:string){
     console.log("Selected user with id "+id);
