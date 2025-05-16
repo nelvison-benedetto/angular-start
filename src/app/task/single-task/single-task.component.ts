@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Task } from './single-task.model';
 
 @Component({
@@ -10,5 +10,10 @@ import { Task } from './single-task.model';
 export class SingleTaskComponent {
 
   task = input.required<Task>();  //using signals
+  complete = output<string>();
+
+  onCompleteTask(){
+    this.complete.emit(this.task().id);  //pass the value to the father
+  }
 
 }

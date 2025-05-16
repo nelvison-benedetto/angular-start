@@ -1,9 +1,10 @@
 import { Component, input , signal } from '@angular/core';
-import { SingleTaskComponent } from "./single-task/single-task.component";  //present 'signal' !
+import { SingleTaskComponent } from "./single-task/single-task.component";
+import { NewTaskComponent } from "./new-task/new-task.component";  //present 'signal' !
 
 @Component({
   selector: 'app-task',
-  imports: [SingleTaskComponent],
+  imports: [SingleTaskComponent, NewTaskComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
@@ -11,6 +12,8 @@ import { SingleTaskComponent } from "./single-task/single-task.component";  //pr
 export class TaskComponent {
   userName = input<string>();
   userId = input<string>();  //id for display ONLY the task of the selected user!
+
+  isAddingTask = false;
 
   tasks = [{
     id: 't1',
@@ -38,6 +41,18 @@ export class TaskComponent {
 
   get selectedUserTasks(){
     return this.tasks.filter(task => task.userId === this.userId());  //always use '()' x signals
+  }
+
+  onCompleteTask(id: string){
+    this.tasks = this.tasks.filter(task => task.id !== id);
+  }
+
+  onStartAddTask(){
+    this.isAddingTask = true;
+  }
+
+  onCancelAddTask(){
+    this.isAddingTask = false;
   }
 
 }
