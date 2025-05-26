@@ -1,10 +1,10 @@
 <div class="backdrop" (click)="onCancel()"></div>  <!--backdrop is black backgroud, when you click outside the form it will close-->
-<dialog open>
+<dialog open>  <!--dialog x usare funzione come .open() .show() .close() sulla finestra-->
   <h2>Add Task</h2>
   <form (ngSubmit)="onSubmit()">
     <p>
       <label for="title">Title</label>
-      <input type="text" id="title" name="title" [(ngModel)]="enteredTitle" />
+      <input type="text" id="title" name="title" [(ngModel)]="enteredTitle" />  <!--BINDING BI-DIREZIONALE, cosi anugla sa a quali proprieta del componente collegarlo!-->
     </p>
     <p>
       <label for="title2 two-ways-binding in action">Title2</label>
